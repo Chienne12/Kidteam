@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Quicksand', Arial, sans-serif;
+    color: #1E1B4B;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg transition-all duration-200 hover:bg-primary-dark hover:-translate-y-0.5 shadow-btn hover:shadow-card-hover;
+  }
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-accent text-white font-semibold rounded-lg transition-all duration-200 hover:bg-accent-dark hover:-translate-y-0.5 shadow-btn-accent;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg transition-all duration-200 hover:bg-primary hover:text-white hover:-translate-y-0.5;
+  }
+  .btn-white {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-semibold rounded-lg transition-all duration-200 hover:bg-gray-100 hover:-translate-y-0.5;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-kidsText;
+  }
+  .section-subtitle {
+    @apply text-lg md:text-xl text-kidsGray font-medium;
+  }
+  .card-base {
+    @apply bg-white rounded-xl2 shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover;
+  }
+  .card-dark {
+    @apply bg-kidsCard rounded-xl2 border border-white/10 shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover;
+  }
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .scale-on-hover {
+    @apply transition-transform duration-200 hover:scale-110;
+  }
+}
+
+/* Floating particles animation */
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+  50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+}
+
+.particle {
+  animation: particle-float 4s ease-in-out infinite;
+}
+
+.particle:nth-child(2) { animation-delay: 0.5s; }
+.particle:nth-child(3) { animation-delay: 1s; }
+.particle:nth-child(4) { animation-delay: 1.5s; }
+.particle:nth-child(5) { animation-delay: 2s; }
+
+/* Hero slider dots */
+.hero-dot {
+  @apply w-2 h-2 rounded-full bg-white/40 transition-all duration-300 cursor-pointer;
+}
+.hero-dot.active {
+  @apply w-6 bg-white;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED, #06B6D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-accent {
+  background: linear-gradient(135deg, #F59E0B, #EF4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover overlay */
+.card-overlay {
+  background: linear-gradient(transparent 49.92%, rgba(124, 58, 237, 0.85) 99.74%);
+}
+
+.card-overlay-hover {
+  background: linear-gradient(180deg, transparent 10.71%, rgba(124, 58, 237, 0.9) 100%);
+}
+
+/* Glassmorphism */
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(124, 58, 237, 0.2));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #7C3AED;
+  border-radius: 3px;
+}
+
+/* Form focus styles */
+.form-input {
+  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-200 font-quicksand text-kidsText placeholder-gray-400 transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20;
+}
+
+/* Nav active state */
+.nav-link {
+  @apply relative text-white/80 font-semibold transition-colors duration-200 hover:text-white;
+}
+.nav-link::after {
+  content: '';
+  @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
+}
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+/* Stats counter animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.stat-animate {
+  animation: countUp 0.6s ease-out forwards;
+}
