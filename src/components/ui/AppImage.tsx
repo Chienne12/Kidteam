@@ -3,6 +3,17 @@
 import React, { useState, useCallback, useMemo, memo } from 'react';
 import Image from 'next/image';
 
+const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const basePath = rawBasePath === '/' ? '' : rawBasePath;
+
+function withBasePath(path: string) {
+    if (!basePath || !path || !path.startsWith('/') || path.startsWith('//') || path === basePath || path.startsWith(`${basePath}/`)) {
+        return path;
+    }
+
+    return `${basePath}${path}`;
+}
+
 interface AppImageProps {
     src: string;
     alt: string;
@@ -40,20 +51,21 @@ const AppImage = memo(function AppImage({
     unoptimized = false,
     ...props
 }: AppImageProps) {
-    const [imageSrc, setImageSrc] = useState(src);
+    const [imageSrc, setImageSrc] = useState(() => withBasePath(src));
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
 
+    const resolvedFallbackSrc = useMemo(() => withBasePath(fallbackSrc), [fallbackSrc]);
     const isExternalUrl = useMemo(() => typeof imageSrc === 'string' && imageSrc.startsWith('http'), [imageSrc]);
     const resolvedUnoptimized = unoptimized || isExternalUrl;
 
     const handleError = useCallback(() => {
-        if (!hasError && imageSrc !== fallbackSrc) {
-            setImageSrc(fallbackSrc);
+        if (!hasError && imageSrc !== resolvedFallbackSrc) {
+            setImageSrc(resolvedFallbackSrc);
             setHasError(true);
         }
         setIsLoading(false);
-    }, [hasError, imageSrc, fallbackSrc]);
+    }, [hasError, imageSrc, resolvedFallbackSrc]);
 
     const handleLoad = useCallback(() => {
         setIsLoading(false);

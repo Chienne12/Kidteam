@@ -2,6 +2,9 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../styles/index.css';
 
+const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const basePath = rawBasePath === '/' ? '' : rawBasePath;
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -12,7 +15,7 @@ export const metadata: Metadata = {
   description: 'Nền tảng giáo dục công nghệ hàng đầu cho trẻ em Việt Nam. Học Scratch, Web Development, Game Development với phương pháp vui vẻ và sáng tạo.',
   icons: {
     icon: [
-      { url: '/favicon.ico', type: 'image/x-icon' }
+      { url: `${basePath}/favicon.ico`, type: 'image/x-icon' }
     ],
   },
 };
