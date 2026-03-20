@@ -2,8 +2,7 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../styles/index.css';
 
-const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-const basePath = rawBasePath === '/' ? '' : rawBasePath;
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export const viewport: Viewport = {
   width: 'device-width',
